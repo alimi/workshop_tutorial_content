@@ -189,8 +189,7 @@
   1.  There are plenty of things to look at, but we'll get to them later. For
       now, let's get the application running!
 
-  1.  Go back to your terminal and make sure you're in the `bookstore`
-      directory.
+  1.  Go back to Terminal and make sure you're in the `bookstore` directory.
 
       Not sure if you're in the `bookstore` directory? Run `pwd` to see what
       directory you're in. You should see something like
