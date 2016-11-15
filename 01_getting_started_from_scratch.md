@@ -250,5 +250,17 @@
 {% endhighlight %}
 
 {% aside %}
-  Describe the bookstore application
+  What's this bookstore we keep talking about? In this tutorial, we're going to
+  use Rails to make an application for a bookstore.
+
+  As you build the application, you'll add features to create, view, edit, and
+  delete books. Since we all have feelings on the books we love...and hate,
+  you'll add features so books can be reviewed by users.
+
+  By creating an application for a bookstore, you'll get explore the different
+  layers of Rails.
+
+  Are you ready?!
+
+  ![Yes!](https://media.giphy.com/media/xT8qBrtlhoV1wl7yUg/giphy.gif)
 {% endaside %}
