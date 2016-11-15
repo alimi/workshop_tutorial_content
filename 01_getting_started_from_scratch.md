@@ -1,6 +1,6 @@
-{% section_header %}
+{% header %}
   # 1 Getting Started from Scratch
-{% endsection_header %}
+{% endheader %}
 
 {% protip %}
   Throughout the tutorial, we're going to run a lot of Terminal commands. For
