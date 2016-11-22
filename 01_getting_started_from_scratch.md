@@ -27,7 +27,7 @@
   1.  Now you're ready to create the bookstore!
 {% endsteps %}
 
-{% highlight %}
+{% highlight shell %}
   > ls
   Desktop Document Music
 
@@ -54,7 +54,7 @@
       created bookstore application.
 {% endsteps %}
 
-{% highlight %}
+{% highlight shell %}
   > rails new bookstore
         create
         create  README.md
@@ -84,35 +84,35 @@
       you'll be working with throughout the tutorial.
 {% endsteps %}
 
-{% highlight %}
+{% highlight shell %}
   › ls -l
   total 48
-  -rw-r--r--   1 alimi  staff  1728 Nov  6 14:31 Gemfile
-  -rw-r--r--   1 alimi  staff  4329 Nov  6 14:33 Gemfile.lock
-  -rw-r--r--   1 alimi  staff   374 Nov  6 14:13 README.md
-  -rw-r--r--   1 alimi  staff   227 Nov  6 14:13 Rakefile
-  drwxr-xr-x  10 alimi  staff   340 Nov  6 14:13 app
-  drwxr-xr-x   7 alimi  staff   238 Nov  6 14:13 bin
-  drwxr-xr-x  14 alimi  staff   476 Nov 12 18:56 config
-  -rw-r--r--   1 alimi  staff   130 Nov  6 14:13 config.ru
-  drwxr-xr-x   4 alimi  staff   136 Nov 12 18:54 db
-  drwxr-xr-x   4 alimi  staff   136 Nov  6 14:13 lib
-  drwxr-xr-x   4 alimi  staff   136 Nov  6 14:34 log
-  drwxr-xr-x   9 alimi  staff   306 Nov  6 14:13 public
-  drwxr-xr-x   9 alimi  staff   306 Nov  6 14:13 test
-  drwxr-xr-x   7 alimi  staff   238 Nov  6 14:34 tmp
-  drwxr-xr-x   3 alimi  staff   102 Nov  6 14:13 vendor
+  -rw-r--r--   1 awesomesauce  staff  1728 Nov  6 14:31 Gemfile
+  -rw-r--r--   1 awesomesauce  staff  4329 Nov  6 14:33 Gemfile.lock
+  -rw-r--r--   1 awesomesauce  staff   374 Nov  6 14:13 README.md
+  -rw-r--r--   1 awesomesauce  staff   227 Nov  6 14:13 Rakefile
+  drwxr-xr-x  10 awesomesauce  staff   340 Nov  6 14:13 app
+  drwxr-xr-x   7 awesomesauce  staff   238 Nov  6 14:13 bin
+  drwxr-xr-x  14 awesomesauce  staff   476 Nov 12 18:56 config
+  -rw-r--r--   1 awesomesauce  staff   130 Nov  6 14:13 config.ru
+  drwxr-xr-x   4 awesomesauce  staff   136 Nov 12 18:54 db
+  drwxr-xr-x   4 awesomesauce  staff   136 Nov  6 14:13 lib
+  drwxr-xr-x   4 awesomesauce  staff   136 Nov  6 14:34 log
+  drwxr-xr-x   9 awesomesauce  staff   306 Nov  6 14:13 public
+  drwxr-xr-x   9 awesomesauce  staff   306 Nov  6 14:13 test
+  drwxr-xr-x   7 awesomesauce  staff   238 Nov  6 14:34 tmp
+  drwxr-xr-x   3 awesomesauce  staff   102 Nov  6 14:13 vendor
 
   › ls -l app
   total 0
-  drwxr-xr-x  6 alimi  staff  204 Nov  6 14:13 assets
-  drwxr-xr-x  3 alimi  staff  102 Nov  6 14:13 channels
-  drwxr-xr-x  4 alimi  staff  136 Nov  6 14:13 controllers
-  drwxr-xr-x  3 alimi  staff  102 Nov  6 14:13 helpers
-  drwxr-xr-x  3 alimi  staff  102 Nov  6 14:13 jobs
-  drwxr-xr-x  3 alimi  staff  102 Nov  6 14:13 mailers
-  drwxr-xr-x  4 alimi  staff  136 Nov  6 14:13 models
-  drwxr-xr-x  3 alimi  staff  102 Nov  6 14:13 views
+  drwxr-xr-x  6 awesomesauce  staff  204 Nov  6 14:13 assets
+  drwxr-xr-x  3 awesomesauce  staff  102 Nov  6 14:13 channels
+  drwxr-xr-x  4 awesomesauce  staff  136 Nov  6 14:13 controllers
+  drwxr-xr-x  3 awesomesauce  staff  102 Nov  6 14:13 helpers
+  drwxr-xr-x  3 awesomesauce  staff  102 Nov  6 14:13 jobs
+  drwxr-xr-x  3 awesomesauce  staff  102 Nov  6 14:13 mailers
+  drwxr-xr-x  4 awesomesauce  staff  136 Nov  6 14:13 models
+  drwxr-xr-x  3 awesomesauce  staff  102 Nov  6 14:13 views
 {% endhighlight %}
 
 {% protip %}
@@ -143,7 +143,7 @@
       configuration](https://en.wikipedia.org/wiki/Convention_over_configuration).
 {% endsteps %}
 
-{% highlight %}
+{% highlight yaml %}
   `config/database.yml`
 
   # SQLite version 3.x
@@ -207,7 +207,7 @@
       [http://localhost:3000](http://localhost:3000).
 {% endsteps %}
 
-{% highlight %}
+{% highlight shell %}
   › pwd
   /Users/awesomesauce/Projects/bookstore
 
@@ -236,14 +236,14 @@
   1.  Now that you're back in Terminal, run `Ctrl-C`to stop the application.
 {% endsteps %}
 
-{% highlight %}
+{% highlight shell %}
   › rails server
   ...
   Started GET "/" for ::1 at 2016-11-12 19:38:25 -0500
   Processing by Rails::WelcomeController#index as HTML
     Parameters: {"internal"=>true}
-    Rendering /Users/alimi/.rvm/gems/ruby-2.3.1/gems/railties-5.0.0.1/lib/rails/templates/rails/welcome/index.html.erb
-    Rendered /Users/alimi/.rvm/gems/ruby-2.3.1/gems/railties-5.0.0.1/lib/rails/templates/rails/welcome/index.html.erb (6.6ms)
+    Rendering /Users/awesomesauce/.rvm/gems/ruby-2.3.1/gems/railties-5.0.0.1/lib/rails/templates/rails/welcome/index.html.erb
+    Rendered /Users/awesomesauce/.rvm/gems/ruby-2.3.1/gems/railties-5.0.0.1/lib/rails/templates/rails/welcome/index.html.erb (6.6ms)
   Completed 200 OK in 71ms (Views: 27.0ms | ActiveRecord: 0.0ms)
   ...
   ^CExiting

@@ -25,7 +25,7 @@
       Let's take a look at this file in your text editor.
 {% endsteps %}
 
-{% highlight %}
+{% highlight shell %}
   › pwd
   /Users/awesomesauce/Projects/bookstore
 
@@ -120,7 +120,7 @@
   1.  Yay! You've just run your first migration!
 {% endsteps %}
 
-{% highlight %}
+{% highlight shell %}
   › pwd
   /Users/awesomesauce/Projects/bookstore
 
@@ -163,7 +163,7 @@
       `Book`s.
 {% endsteps %}
 
-{% highlight %}
+{% highlight shell %}
   › pwd
   /Users/awesomesauce/Projects/bookstore
 
