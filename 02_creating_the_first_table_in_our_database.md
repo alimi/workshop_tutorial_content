@@ -270,3 +270,122 @@
     end
   end
 {% endhighlight %}
+
+{% steps %}
+  1.  Your database is currently in a bad state. The `books` table needs a
+      `quantity` column to store the number of available books. Fortunately, we
+      have a few ways to fix this.
+
+  1.  Migrations are designed to run in two directions. So far, we've run the
+      `CreateBooks` migration "up" to add the `books` table.
+
+      Now, we're going to run the `CreateBooks` migration "down". By running the
+      migration "down", the `books` table will be removed. With the table no
+      longer in the database, we can make changes to the migration and re-run it
+      so the `books` table has the `quantity` column.
+
+  1.  First, exit the `rails console` by running `exit`.
+
+  1.  Then, run the `CreateBooks` migration down by running `rake db:rollback`.
+{% endsteps %}
+
+{% highlight shell %}
+  >> exit
+
+  › rake db:rollback
+  == 20161115030350 CreateBooks: reverting ======================================
+  -- drop_table(:books)
+     -> 0.0098s
+  == 20161115030350 CreateBooks: reverted (0.0143s) =============================
+{% endhighlight %}
+
+{% steps %}
+  1.  Go back to your text editor and open the `CreateBooks` migration.
+
+  1.  Inside the `create_table` block, add the following line:
+
+      ```
+      t.integer :quantity
+      ```
+
+  1.  Save your changes to the `CreateBooks` migration.
+{% endsteps %}
+
+{% highlight ruby %}
+  class CreateBooks < ActiveRecord::Migration[5.0]
+    def change
+      create_table :books do |t|
+        t.string :title
+        t.string :author
+        t.integer :price_cents
+        t.timestamps
+        t.integer :quantity
+      end
+    end
+  end
+{% endhighlight %}
+
+{% steps %}
+  1.  Go back to your terminal and re-run the migration by running `rake
+      db:migrate`.
+{% endsteps %}
+
+{% highlight shell %}
+  › rake db:migrate
+  == 20161115030350 CreateBooks: migrating ======================================
+  -- create_table(:books)
+     -> 0.0415s
+  == 20161115030350 CreateBooks: migrated (0.0416s) =============================
+{% endhighlight %}
+
+{% steps %}
+  1.  Now that your `books` table has the `quantity` column, you can go back to
+      adding my favorite book :)
+
+  1.  Enter the `rails console` by running...`rails console`.
+
+  1.  You already forgot what my favorite book was, didn't you?
+
+      No worries - just run the following code in your console to refresh your
+      memory:
+
+      ```
+      my_favorite_book = Book.new
+      my_favorite_book.title = "why's (poignant) Guide to Ruby"
+      my_favorite_book.author = "why the lucky stiff"
+      ```
+
+  1.  Ok, now that you have my favorite book again try adding the quantity:
+
+      ```
+      my_favorite_book.quantity = 500
+      ```
+
+  1.  Alright, my favorite book is coming along nicely. I think we're ready to
+      save it to your database.
+
+      Run `my_favorite_book.save` to save my favorite book to your database.
+
+  1.  If the last thing you see says `true`, my favorite books has been saved to
+      your database. Yay!
+{% endsteps %}
+
+{% highlight ruby %}
+  >> my_favorite_book = Book.new
+  => #<Book id: nil, title: nil, author: nil, price_cents: nil, created_at: nil, updated_at: nil, quantity: nil>
+
+  >> my_favorite_book.title = "why's (poignant) Guide to Ruby"
+  => "why's (poignant) Guide to Ruby"
+
+  >> my_favorite_book.author = "why the lucky stiff"
+  => "why the lucky stiff"
+
+  >> my_favorite_book.quantity = 500
+  => 500
+
+  >> my_favorite_book.save
+     (0.1ms)  begin transaction
+    SQL (0.5ms)  INSERT INTO "books" ("title", "author", "created_at", "updated_at", "quantity") VALUES (?, ?, ?, ?, ?)  [["title", "why's (poignant) Guide to Ruby"], ["author", "why the lucky stiff"], ["created_at", 2016-11-22 04:03:14 UTC], ["updated_at", 2016-11-22 04:03:14 UTC], ["quantity", 500]]
+     (2.4ms)  commit transaction
+  => true
+{% endhighlight %}
