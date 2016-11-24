@@ -353,6 +353,7 @@
       my_favorite_book = Book.new
       my_favorite_book.title = "why's (poignant) Guide to Ruby"
       my_favorite_book.author = "why the lucky stiff"
+      my_favorite_book.price_cents = 100
       ```
 
   1.  Ok, now that you have my favorite book again try adding the quantity:
@@ -380,12 +381,88 @@
   >> my_favorite_book.author = "why the lucky stiff"
   => "why the lucky stiff"
 
+  >> my_favorite_book.price_cents = 100
+  => 100
+
   >> my_favorite_book.quantity = 500
   => 500
 
   >> my_favorite_book.save
      (0.1ms)  begin transaction
-    SQL (0.5ms)  INSERT INTO "books" ("title", "author", "created_at", "updated_at", "quantity") VALUES (?, ?, ?, ?, ?)  [["title", "why's (poignant) Guide to Ruby"], ["author", "why the lucky stiff"], ["created_at", 2016-11-22 04:03:14 UTC], ["updated_at", 2016-11-22 04:03:14 UTC], ["quantity", 500]]
-     (2.4ms)  commit transaction
+    SQL (0.8ms)  INSERT INTO "books" ("title", "author", "price_cents", "created_at", "updated_at", "quantity") VALUES (?, ?, ?, ?, ?, ?)  [["title", "why's (poignant) Guide to Ruby"], ["author", "why the lucky stiff"], ["price_cents", 100], ["created_at", 2016-11-24 03:30:53 UTC], ["updated_at", 2016-11-24 03:30:53 UTC], ["quantity", 500]]
+     (2.3ms)  commit transaction
   => true
 {% endhighlight %}
+
+{% steps %}
+  1.  Now that you've used the `save` method to save a book to your database,
+      let me show you another way to save a book to your database!
+
+  1.  Let's try using the `create` method to add my second favorite book to your
+      database.
+
+      Run the following code on the rails console:
+
+      ```
+      Book.create(title: "Oh, the Places You'll Go!", author: "Dr. Seuss", price_cents: 500, quantity: 200)
+      ```
+
+  1.  The `create` method lets us save data in a single command. Instead of
+      setitng attributes one at a time, we can set them all at once.
+{% endsteps %}
+
+{% highlight ruby %}
+  >> Book.create(title: "Oh, the Places You'll Go!", author: "Dr. Seuss", price_cents: 500, quantity: 200)
+     (0.1ms)  begin transaction
+    SQL (0.8ms)  INSERT INTO "books" ("title", "author", "price_cents", "created_at", "updated_at", "quantity") VALUES (?, ?, ?, ?, ?, ?)  [["title", "Oh, the Places You'll Go!"], ["author", "Dr. Seuss"], ["price_cents", 500], ["created_at", 2016-11-24 03:33:22 UTC], ["updated_at", 2016-11-24 03:33:22 UTC], ["quantity", 200]]
+     (3.7ms)  commit transaction
+  => #<Book id: 2, title: "Oh, the Places You'll Go!", author: "Dr. Seuss", price_cents: 500, created_at: "2016-11-24 03:33:22", updated_at: "2016-11-24 03:33:22", quantity: 200>
+{% endhighlight %}
+
+{% steps %}
+  1.  Now that we've added some books to your database, let's try pulling them
+      out of the database.
+
+  1.  My second favorite book was the last book you added to your database. To
+      get it, run `Book.last` on the rails console.
+
+  1.  My favorite book was the first book you added. Can you guess how we would
+      get it?
+
+      Run `Book.first` to get the first book in your database.
+
+  1.  What if you wanted to see all the books in your database? How would you do
+      that??
+
+      Run `Book.all` to get all the books in your database.
+
+  1.  Programming can be really confusing, but every once in a while it kinda
+      makes sense :)
+{% endsteps %}
+
+{% highlight ruby %}
+  >> Book.last
+    Book Load (0.2ms)  SELECT  "books".* FROM "books" ORDER BY "books"."id" DESC LIMIT ?  [["LIMIT", 1]]
+  => #<Book id: 2, title: "Oh, the Places You'll Go!", author: "Dr. Seuss", price_cents: 500, created_at: "2016-11-24 03:33:22", updated_at: "2016-11-24 03:33:22", quantity: 200>
+
+  >> Book.first
+    Book Load (0.2ms)  SELECT  "books".* FROM "books" ORDER BY "books"."id" ASC LIMIT ?  [["LIMIT", 1]]
+  => #<Book id: 1, title: "why's (poignant) Guide to Ruby", author: "why the lucky stiff", price_cents: 100, created_at: "2016-11-24 03:30:53", updated_at: "2016-11-24 03:30:53", quantity: 500>
+
+  >> Book.all
+    Book Load (0.2ms)  SELECT "books".* FROM "books"
+  => #<ActiveRecord::Relation [#<Book id: 1, title: "why's (poignant) Guide to Ruby", author: "why the lucky stiff", price_cents: 100, created_at: "2016-11-24 03:30:53", updated_at: "2016-11-24 03:30:53", quantity: 500>, #<Book id: 2, title: "Oh, the Places You'll Go!", author: "Dr. Seuss", price_cents: 500, created_at: "2016-11-24 03:33:22", updated_at: "2016-11-24 03:33:22", quantity: 200>]>
+{% endhighlight %}
+
+{% steps %}
+  1.  As happy as I am to see some of my favorite books in your bookstore, I'm
+      sure you have some you'd like to add as well.
+
+  1.  Add five more books to your bookstore.
+
+  1.  When you're done, run `Book.count` to get the total number of books in
+      your database. It should return 7.
+
+  1.  After you've added five more books and verified that they are saved to
+      your database, exit the rails console by running `exit`.
+{% endsteps %}
