@@ -353,3 +353,148 @@
     Rendered books/index.html.erb within layouts/application (1.7ms)
   Completed 200 OK in 645ms (Views: 631.6ms | ActiveRecord: 0.0ms)
 {% endhighlight %}
+
+{% steps %}
+  1.  Ok, let's make this page a little more interesting.
+
+  1.  In your text editor, open `app/views/books/index.html.erb` and add the
+      following line:
+
+      ```
+      <h1>Welcome to My Super Rad Bookstore!</h1>
+      ```
+
+  1.  Save your changes and go to
+      [http://localhost:3000/books](http:://localhost:3000/books) again.
+
+      Yay! 🎉
+{% endsteps %}
+
+{% highlight ruby %}
+  <h1>Welcome to My Super Rad Bookstore!</h1>
+{% endhighlight %}
+
+{% aside %}
+  You've been going to the `/books` path a bunch and as a result you've been
+  running the `BooksController` `index` action a lot.
+
+  You can think of the `index` action as the index of a book because it's used
+  to list all of a controller's resources. Since we're in the
+  `BooksController`, this `index` action is going to list all of the
+  application's books.
+{% endaside %}
+
+{% steps %}
+  1.  Before you can show all of your application's books, you have to make the
+      books data available.
+
+  1.  In your text editor, open `app/controllers/books_controller.rb`. Inside
+      the `index` method, add the following line:
+
+      ```
+      @books = Book.all
+      ```
+
+      That line might look a little familiar. We used `Book.all` in [Chapter
+      2](link) to list all your application's books in the `rails console`.
+      We're using the same method again so we can render your application's
+      books in the browser.
+
+  1.  Save your changes.
+{% endsteps %}
+
+{% highlight ruby %}
+  class BooksController < ApplicationController
+    def index
+      @books = Book.all
+    end
+  end
+{% endhighlight %}
+
+{% steps %}
+  1.  By making that change to the `index` action, you've made book data
+      available to your `index` template.
+
+      Let's see what you can do with it.
+
+  1.  In your text editor, open `app/views/books/index.html.erb` and add the
+      following line to the end of the file:
+
+      ```
+      <%= @books[0].title %>
+      ```
+
+  1.  Save your changes and try going to
+      [http://localhost:3000/books](http://localhost:3000/books) again.
+{% endsteps %}
+
+{% highlight ruby %}
+  <h1>Welcome to My Super Rad Bookstore!</h1>
+  <%= @books[0].title %>
+{% endhighlight %}
+
+{% screenshot %}
+  Browser showing /books with the application's first book title
+{% endscreenshot %}
+
+{% steps %}
+  1.  Your application's data might be a little different than mine, but you're
+      probably seeing the title to *MY* favorite book. Yippie!
+
+      (If your data is different, you're seeing the title of some other
+      book...sigh 😉)
+
+  1.  You had to do a couple of things to get that title to show up in your
+      browser.
+
+      First in the `BooksController` `index` method, you defined an instance
+      variable `@books` and assigned it all the books in your application.
+
+      Then in the associated `index` template
+      (`app/views/books/index.html.erb`), you used some funny looking syntax to
+      get the first book and show it's title.
+
+      Let's focus on that funny looking syntax for a few minutes.
+{% endsteps %}
+
+{% steps %}
+  1.  In your text editor, open `app/views/books/index.html.erb`.
+
+  1.  Remember that line you added to the end of the file?
+
+      ```
+      <%= @books[0].title %>
+      ```
+
+      Change it so it looks like this:
+
+      ```
+      <%= @books[1].title %>
+      ```
+
+  1.  Can you guess what this will change? Reload
+      [http:://localhost:3000/books](http:://localhost:3000/books) to see what
+      happens.
+{% endsteps %}
+
+{% screenshot %}
+  Browser showing /books with the application's second book title
+{% endscreenshot %}
+
+{% steps %}
+  1.  You're seeing a different book title, aren't you?
+
+      You used `@books[0]` to get the first book, and you changed it to
+      `@books[1]` to get the next book.
+
+  1.  I bet you could get all the books to render on the `index` template...
+
+      Spend some time and see if you can get all the book titles to render. If
+      you've been following along with the tutorial, you should have seven
+      books in your application.
+
+      If you know some HTML, try listing the titles in an unorderd list.
+
+      Don't know very much HTML? Don't worry about it - you'll get familiar with
+      it reaaaal soon. Just focus on getting the titles to render.
+{% endsteps %}
