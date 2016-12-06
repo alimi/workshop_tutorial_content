@@ -493,8 +493,231 @@
       you've been following along with the tutorial, you should have seven
       books in your application.
 
-      If you know some HTML, try listing the titles in an unorderd list.
+      If you know some HTML, try listing the titles in an unordered list.
 
       Don't know very much HTML? Don't worry about it - you'll get familiar with
       it reaaaal soon. Just focus on getting the titles to render.
 {% endsteps %}
+
+{% steps %}
+  1.  What did you come up with?
+
+      One way may have been to list out each book like this:
+
+      ```
+      <%= @books[0].title %>
+      <%= @books[1].title %>
+      <%= @books[2].title %>
+      <%= @books[3].title %>
+      <%= @books[4].title %>
+      <%= @books[5].title %>
+      <%= @books[6].title %>
+      ```
+
+      That renders all the book titles, but they end up getting rendered on a
+      single line.
+
+  1.  If you know some HTML, you may have thrown in a few `br`s to give the
+      titles some space like this:
+
+      ```
+      <%= @books[0].title %>
+      <br>
+      <%= @books[1].title %>
+      <br>
+      <%= @books[2].title %>
+      <br>
+      <%= @books[3].title %>
+      <br>
+      <%= @books[4].title %>
+      <br>
+      <%= @books[5].title %>
+      <br>
+      <%= @books[6].title %>
+      ```
+
+  1.  Better yet, you may have even used an unordered list:
+
+      ```
+      <ul>
+        <li><%= @books[0].title %></li>
+        <li><%= @books[1].title %></li>
+        <li><%= @books[2].title %></li>
+        <li><%= @books[3].title %></li>
+        <li><%= @books[4].title %></li>
+        <li><%= @books[5].title %></li>
+        <li><%= @books[6].title %></li>
+      </ul>
+    ```
+
+  1.  If you used an unordered list, great! If not, no worries - update your
+      solution to use an unordered list.
+{% endsteps %}
+
+{% highlight ruby %}
+  <h1>Welcome to My Super Rad Bookstore!</h1>
+
+  <ul>
+    <li><%= @books[0].title %></li>
+    <li><%= @books[1].title %></li>
+    <li><%= @books[2].title %></li>
+    <li><%= @books[3].title %></li>
+    <li><%= @books[4].title %></li>
+    <li><%= @books[5].title %></li>
+    <li><%= @books[6].title %></li>
+  </ul>
+{% endhighlight %}
+
+{% screenshot %}
+Rendered books index with ul of book titles
+{% endscreenshot %}
+
+{% steps %}
+  1.  Yay! Book titles!
+
+      But doesn't a lot of that code in your template look just a
+      little...repetitive?
+
+      ```
+      <li><%= @books[0].title %></li>
+      <li><%= @books[1].title %></li>
+      <li><%= @books[2].title %></li>
+      ...
+      ```
+
+      There has to be a better way!?
+
+      There is :)
+
+  1.  Remember when you defined `@books` in the `BooksController` `index`
+      method?
+
+      ```
+      @books = Book.all
+      ```
+
+      You defined `@books` to be a collection of all the books in your
+      application's database. For our purposes, we can treat this collection
+      like a [Ruby Array](http://ruby-doc.org/core-2.3.1/Array.html).
+
+  1.  You can get each item of a Ruby array by it's index, and the first item
+      starts at index 0.
+
+      Does that sound familiar? It's what you used to render the book titles.
+
+      ```
+      <li><%= @books[0].title %></li>
+      <li><%= @books[1].title %></li>
+      ...
+      ```
+
+      This works well, but it's a very manual process. You have to individually
+      access each book to render its title. It also depends on us knowing how
+      many books there are in the database.
+
+  1.  In Ruby, we don't have to access each book individually like this. We can
+      use Array's
+      [`each`](http://ruby-doc.org/core-2.3.1/Array.html#method-i-each) method
+      to help us out.
+
+      Let's see what that would look like.
+{% endsteps %}
+
+{% steps %}
+  1.  Go back to your terminal and quit the `rails server` by running `Ctrl-c`.
+
+  1.  Now, start the `rails console` by running...`rails console`.
+
+  1.  Run the following code:
+
+      ```
+      books = Books.all
+      ```
+
+      You now have a `books` variable that's been assigned all the books in your
+      application's database. `books` can be thought of as a Ruby Array.
+
+      Sound familiar :)
+
+  1.  Now, try running the following:
+
+      ```
+      books.each { |book| puts book.title }
+      ```
+
+  1.  What happened?
+
+      You used the `each` method to iterate over each book and print its title.
+
+  1.  The curly braces ({}) after `each` are the start and end of a block.
+      We've seen the other block notation before - it starts with a `do` and
+      ends with an `end`.
+
+      Try running the following:
+
+      ```
+      books.each do |book|
+        puts book.title
+      end
+      ```
+
+      The syntax might be different, but it's the same result - each of the book
+      titles are printed.
+
+  1.  At the beginning of the block, you have a couple of pipes surronding `book`
+
+      ```
+      books.each { |book| ... }
+      ```
+
+      This is called a block parameter. In this case, it lets you access each
+      book so you can print its title.
+
+  1.  Before, we would've manually gone through each book to print its title.
+
+      ```
+      puts books[0].title
+      puts books[1].title
+      ...
+      ```
+
+      Now, `each` lets us do it in a lot less code.
+
+      ```
+      books.each { |book| puts book.title }
+      ```
+
+  1.  Try playing with the `each` method to see what else you can print out. You
+      should be able print things like the book ids, authors, and quantities.
+
+  1.  When you're done exploring, run `exit` to exit the `rails console` and
+      restart the `rails server`.
+{% endsteps %}
+
+{% highlight ruby %}
+  >> books = Book.all
+    Book Load (1.4ms)  SELECT "books".* FROM "books"
+  => #<ActiveRecord::Relation [#<Book id: 1, title: "why's (poignant) Guide to Ruby", author: "why the lucky stiff", price_cents: 100, created_at: "2016-11-24 03:30:53", updated_at: "2016-11-24 03:30:53", quantity: 500>, #<Book id: 2, title: "Oh, the Places You'll Go!", author: "Dr. Seuss", price_cents: 500, created_at: "2016-11-24 03:33:22", updated_at: "2016-11-24 03:33:22", quantity: 200>, #<Book id: 4, title: "1984", author: "George Orwell", price_cents: 0, created_at: "2016-11-30 01:35:44", updated_at: "2016-11-30 01:35:44", quantity: 200>, #<Book id: 5, title: "The Sound and The Fury", author: "William Faulkner", price_cents: 500, created_at: "2016-11-30 01:36:47", updated_at: "2016-11-30 01:36:47", quantity: 150>, #<Book id: 6, title: "Life of Pi", author: "Yann Martel", price_cents: 750, created_at: "2016-11-30 01:37:40", updated_at: "2016-11-30 01:37:40", quantity: 50>, #<Book id: 7, title: "The Kite Runner", author: "Khaled Hosseini", price_cents: 600, created_at: "2016-11-30 01:38:28", updated_at: "2016-11-30 01:38:28", quantity: 23>, #<Book id: 8, title: "Ender's Game", author: "Orson Scott Card", price_cents: 42, created_at: "2016-11-30 01:40:20", updated_at: "2016-11-30 01:40:20", quantity: 1000>]>
+
+  >> books.each { |book| puts book.title }
+  why's (poignant) Guide to Ruby
+  Oh, the Places You'll Go!
+  1984
+  The Sound and The Fury
+  Life of Pi
+  The Kite Runner
+  Ender's Game
+  => [#<Book id: 1, title: "why's (poignant) Guide to Ruby", author: "why the lucky stiff", price_cents: 100, created_at: "2016-11-24 03:30:53", updated_at: "2016-11-24 03:30:53", quantity: 500>, #<Book id: 2, title: "Oh, the Places You'll Go!", author: "Dr. Seuss", price_cents: 500, created_at: "2016-11-24 03:33:22", updated_at: "2016-11-24 03:33:22", quantity: 200>, #<Book id: 4, title: "1984", author: "George Orwell", price_cents: 0, created_at: "2016-11-30 01:35:44", updated_at: "2016-11-30 01:35:44", quantity: 200>, #<Book id: 5, title: "The Sound and The Fury", author: "William Faulkner", price_cents: 500, created_at: "2016-11-30 01:36:47", updated_at: "2016-11-30 01:36:47", quantity: 150>, #<Book id: 6, title: "Life of Pi", author: "Yann Martel", price_cents: 750, created_at: "2016-11-30 01:37:40", updated_at: "2016-11-30 01:37:40", quantity: 50>, #<Book id: 7, title: "The Kite Runner", author: "Khaled Hosseini", price_cents: 600, created_at: "2016-11-30 01:38:28", updated_at: "2016-11-30 01:38:28", quantity: 23>, #<Book id: 8, title: "Ender's Game", author: "Orson Scott Card", price_cents: 42, created_at: "2016-11-30 01:40:20", updated_at: "2016-11-30 01:40:20", quantity: 1000>]
+
+  >> books.each do |book|
+  ?>     puts book.title
+  >>   end
+  why's (poignant) Guide to Ruby
+  Oh, the Places You'll Go!
+  1984
+  The Sound and The Fury
+  Life of Pi
+  The Kite Runner
+  Ender's Game
+  => [#<Book id: 1, title: "why's (poignant) Guide to Ruby", author: "why the lucky stiff", price_cents: 100, created_at: "2016-11-24 03:30:53", updated_at: "2016-11-24 03:30:53", quantity: 500>, #<Book id: 2, title: "Oh, the Places You'll Go!", author: "Dr. Seuss", price_cents: 500, created_at: "2016-11-24 03:33:22", updated_at: "2016-11-24 03:33:22", quantity: 200>, #<Book id: 4, title: "1984", author: "George Orwell", price_cents: 0, created_at: "2016-11-30 01:35:44", updated_at: "2016-11-30 01:35:44", quantity: 200>, #<Book id: 5, title: "The Sound and The Fury", author: "William Faulkner", price_cents: 500, created_at: "2016-11-30 01:36:47", updated_at: "2016-11-30 01:36:47", quantity: 150>, #<Book id: 6, title: "Life of Pi", author: "Yann Martel", price_cents: 750, created_at: "2016-11-30 01:37:40", updated_at: "2016-11-30 01:37:40", quantity: 50>, #<Book id: 7, title: "The Kite Runner", author: "Khaled Hosseini", price_cents: 600, created_at: "2016-11-30 01:38:28", updated_at: "2016-11-30 01:38:28", quantity: 23>, #<Book id: 8, title: "Ender's Game", author: "Orson Scott Card", price_cents: 42, created_at: "2016-11-30 01:40:20", updated_at: "2016-11-30 01:40:20", quantity: 1000>]
+{% endhighlight %}
