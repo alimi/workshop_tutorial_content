@@ -721,3 +721,181 @@ Rendered books index with ul of book titles
   Ender's Game
   => [#<Book id: 1, title: "why's (poignant) Guide to Ruby", author: "why the lucky stiff", price_cents: 100, created_at: "2016-11-24 03:30:53", updated_at: "2016-11-24 03:30:53", quantity: 500>, #<Book id: 2, title: "Oh, the Places You'll Go!", author: "Dr. Seuss", price_cents: 500, created_at: "2016-11-24 03:33:22", updated_at: "2016-11-24 03:33:22", quantity: 200>, #<Book id: 4, title: "1984", author: "George Orwell", price_cents: 0, created_at: "2016-11-30 01:35:44", updated_at: "2016-11-30 01:35:44", quantity: 200>, #<Book id: 5, title: "The Sound and The Fury", author: "William Faulkner", price_cents: 500, created_at: "2016-11-30 01:36:47", updated_at: "2016-11-30 01:36:47", quantity: 150>, #<Book id: 6, title: "Life of Pi", author: "Yann Martel", price_cents: 750, created_at: "2016-11-30 01:37:40", updated_at: "2016-11-30 01:37:40", quantity: 50>, #<Book id: 7, title: "The Kite Runner", author: "Khaled Hosseini", price_cents: 600, created_at: "2016-11-30 01:38:28", updated_at: "2016-11-30 01:38:28", quantity: 23>, #<Book id: 8, title: "Ender's Game", author: "Orson Scott Card", price_cents: 42, created_at: "2016-11-30 01:40:20", updated_at: "2016-11-30 01:40:20", quantity: 1000>]
 {% endhighlight %}
+
+{% steps %}
+  1.  Let's put this knowledge to work.
+
+  1.  In you text editor, open `app/views/books/index.html.erb`.
+
+  1.  At the end of the file, add a new, empty unordered list. It should look
+      like this:
+
+      ```
+      <ul>
+      </ul>
+      ```
+
+  1.  Inside the new unordered list, we'll want to iterate over all the books
+      assigned to `@books` and render a list item for each book title.
+
+      We can iterate over `@books` by using the `each` method.
+
+  1.  We've seen how to use the `each` method on the `rails console`, but how
+      will you use it in your template?
+
+      To run Ruby code in your template, you have to put it inside some funny
+      looking brackets:
+
+      ```
+      <% ... %>
+      ```
+
+      Everything inside `<% %>` will get run in your template.
+
+      We've seen something similar before. Remember how you got the book titles
+      to render?
+
+      ```
+      <%= @books[0].title %>
+      ```
+
+      The syntax is slightly different. `<%= %>` runs Ruby code *and* renders
+      the result in your template.
+
+      `<% %>` on the other hand *only* runs Ruby code. It *does not* render the
+      result of that code.
+
+  1.  With that in mind, add the following code inside your new unordered list:
+
+      ```
+      <% @books.each do |book| %>
+      <% end %>
+      ```
+
+      Go to [http://localhost:3000/books](http://localhost:3000/books) again.
+      Did anything change?
+
+      Nothing changed! You're running `@books.each` in your template, but since
+      it's inside `<% %>` the result of that block isn't rendered.
+{% endsteps %}
+
+{% highlight ruby %}
+  <h1>Welcome to My Super Rad Bookstore!</h1>
+
+  <ul>
+    <li><%= @books[0].title %></li>
+    <li><%= @books[1].title %></li>
+    <li><%= @books[2].title %></li>
+    <li><%= @books[3].title %></li>
+    <li><%= @books[4].title %></li>
+    <li><%= @books[5].title %></li>
+    <li><%= @books[6].title %></li>
+  </ul>
+
+  <ul>
+    <% @books.each do |book| %>
+    <% end %>
+  </ul>
+{% endhighlight %}
+
+{% steps %}
+  1.  Now that you have your block setup, you're ready to render some book
+      titles.
+
+  1.  Spend a few minutes and see if you can get each book title to render as a
+      list item inside the block.
+
+      Inside the block, each book is availble to you as `book`.
+
+      When you're done, you should see two identical unordered lists on
+      [http://localhost:3000/books](http://localhost:3000/books).
+{% endsteps %}
+
+{% screenshot %}
+Screenshot of /books with two unordered lists
+{% endscreenshot %}
+
+{% steps %}
+  1.  Did you get it?! Your new unordered list should look something like this:
+
+      ```
+      <ul>
+        <% @books.each do |book| %>
+          <li><%= book.title %></li>
+        <% end %>
+      </ul>
+      ```
+
+      Update your solution to match this solution.
+
+  1.  Compare your two unordered lists. They both end in the same result, but one
+      required a little more effort.
+
+      ```
+      <ul>
+        <li><%= @books[0].title %></li>
+        <li><%= @books[1].title %></li>
+        <li><%= @books[2].title %></li>
+        <li><%= @books[3].title %></li>
+        <li><%= @books[4].title %></li>
+        <li><%= @books[5].title %></li>
+        <li><%= @books[6].title %></li>
+      </ul>
+
+      <ul>
+        <% @books.each do |book| %>
+          <li><%= book.title %></li>
+        <% end %>
+      </ul>
+      ```
+
+      We can take advantage of the ability to run Ruby code inside Rails
+      templates to do things quickly.
+
+  1.  You don't need to show both unordered lists, so go ahead and remove the
+      first one.
+{% endsteps %}
+
+{% highlight ruby %}
+  <h1>Welcome to My Super Rad Bookstore!</h1>
+
+  <ul>
+    <% @books.each do |book| %>
+      <li><%= book.title %></li>
+    <% end %>
+  </ul>
+{% endhighlight %}
+
+{% steps %}
+  1.  Now that you have book titles rendering, let's try adding some
+      information.
+
+  1.  Update the books unordered lists so it includes the book author next to
+      each author like this:
+
+      why's (poignant) Guide to Ruby by why the lucky stiff
+{% endsteps %}
+
+{% steps %}
+  1.  What did you come up with? Compare your solution with people around you.
+
+      Inside the `@books.each` block, you should've edited the list item so it
+      renders each book's author next to its title.
+
+      ```
+      <li><%= book.title %> by <%= book.author %></li>
+      ```
+
+  1.  Before you wrap up, make sure you have the book authors rendering next to
+      the book titles.
+{% endsteps %}
+
+{% highlight ruby %}
+  <h1>Welcome to My Super Rad Bookstore!</h1>
+
+  <ul>
+    <% @books.each do |book| %>
+      <li><%= book.title %> by <%= book.author %></li>
+    <% end %>
+  </ul>
+{% endhighlight %}
