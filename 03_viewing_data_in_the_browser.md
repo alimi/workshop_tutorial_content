@@ -3,15 +3,11 @@
 {% endheader %}
 
 {% steps %}
-  1.  You've added a lot of books to your bookstore, but wouldn't it be nice to
-      actually see them in the browser? You are building a web application after
-      all.
+  1.  You've added a lot of books to your bookstore, but wouldn't it be nice to actually see them in the browser? You are building a web application after all.
 
-  1.  Before you can see your books, you'll need make some changes. Open the
-      `bookstore` directory in your text editor.
+  1.  Before you can see your books, you'll need make some changes. Open the `bookstore` directory in your text editor.
 
-  1.  Now open `config/routes.rb` and add the following line inside the only
-      block in the file:
+  1.  Now open `config/routes.rb` and add the following line inside the only block in the file:
 
       ```
       resources :books
@@ -30,8 +26,7 @@
 {% steps %}
   1.  Go back to Terminal and make sure you're in the `bookstore` directory.
 
-  1.  Run `rake routes`. You should see a bunch of stuff about books along the
-      lines of...
+  1.  Run `rake routes`. You should see a bunch of stuff about books along the lines of...
 
       ```
          Prefix Verb   URI Pattern               Controller#Action
@@ -45,14 +40,11 @@
                 DELETE /books/:id(.:format)      books#destroy
       ```
 
-      `rake routes` prints a table of the available routes in your application.
-      Since you added `books` as a resource in `config/routes.rb`, your
-      application has a bunch of book routes.
+      `rake routes` prints a table of the available routes in your application. Since you added `books` as a resource in `config/routes.rb`, your application has a bunch of book routes.
 
       The `URI Pattern` column tells you how to reach the routes from a browser.
 
-      For example, when your application is running locally you can reach
-      `/books` by going to `http://localhost:300/books`.
+      For example, when your application is running locally you can reach `/books` by going to `http://localhost:300/books`.
 {% endsteps %}
 
 {% highlight shell %}
@@ -76,8 +68,7 @@
 
   1.  In Terminal, run `rails server` to start your application's web server.
 
-  1.  Now, open your favorite web browser and go to
-      [http://localhost:3000/books](http://localhost:3000/books).
+  1.  Now, open your favorite web browser and go to [http://localhost:3000/books](http://localhost:3000/books).
 
   1.  If I had to guess, you probably got an error :)
 {% endsteps %}
@@ -106,20 +97,15 @@
 {% endscreenshot %}
 
 {% steps %}
-  1.  We've run into a problem, but Rails is giving us some info to help us
-      understand what's going on.
+  1.  We've run into a problem, but Rails is giving us some info to help us understand what's going on.
 
-      You're getting a `Routing Error` because there's an `uninitialized
-      constant BooksController`. Rails is expecting your application will have a
-      `BooksController`, so let's create it!
+      You're getting a `Routing Error` because there's an `uninitialized constant BooksController`. Rails is expecting your application will have a `BooksController`, so let's create it!
 
   1.  Stop your rails server by running `Ctrl-c`.
 
-  1.  Create the `BooksController` by running
-      `touch app/controllers/books_controller.rb`.
+  1.  Create the `BooksController` by running `touch app/controllers/books_controller.rb`.
 
-  1.  Restart your web server by running `rails server`, and try going to
-      [http:://localhost:3000/books](http:://localhost:3000/books) again.
+  1.  Restart your web server by running `rails server`, and try going to [http:://localhost:3000/books](http:://localhost:3000/books) again.
 
       That still errored, didn't it? But hey, at least you got a new error!
 {% endsteps %}
@@ -160,32 +146,26 @@
   1.  Now you got a `LoadError` because `BooksController` isn't defined.
 
       ```
-      Unable to autoload constant BooksController, expected
-      /Users/awesomesauce/Projects/bookstore/app/controllers/books_controller.rb
-      to define it
+      Unable to autoload constant BooksController, expected /Users/awesomesauce/Projects/bookstore/app/controllers/books_controller.rb to define it
       ```
 
   1.  Remember the `touch` command we used to create the `BooksController`?
 
       `touch app/controllers/books_controller.rb`.
 
-      It created the `BooksController` file, but the file is empty. Don't belive
-      me? Let's take a look.
+      It created the `BooksController` file, but the file is empty. Don't belive me? Let's take a look.
 {% endsteps %}
 
 {% steps %}
-  1.  If you're text editor isn't already open, open it and go to the
-      `bookstore` directory.
+  1.  If you're text editor isn't already open, open it and go to the `bookstore` directory.
 
   1.  Now, open `app/controllers/books_controller.rb`.
 
   1.  See, it's empty :)
 
-      `touch` creates empty files. We used it to create an empty file called
-      `app/controllers/books_controller.rb`.
+      `touch` creates empty files. We used it to create an empty file called `app/controllers/books_controller.rb`.
 
-  1.  The error you got said something about there being a missing constant
-      `BooksController`. Let's add it.
+  1.  The error you got said something about there being a missing constant `BooksController`. Let's add it.
 
   1.  Add the following code to `app/controllers/books_controller.rb`:
 
@@ -196,8 +176,7 @@
 
       That should define the constant Rails was looking for.
 
-  1.  Save the file and try going to
-      [http://localhost:3000/books](http://localhost:3000/books) again.
+  1.  Save the file and try going to [http://localhost:3000/books](http://localhost:3000/books) again.
 
       New error!
 {% endsteps %}
@@ -213,13 +192,9 @@
 {% endscreenshot %}
 
 {% steps %}
-  1.  This new error is telling us that you're `BooksController` doesn't have an
-      `index` action. That kinda makes sense - we didn't add very much code to
-      the `BooksController`. But why does it care that the `index` action is
-      missing?
+  1.  This new error is telling us that you're `BooksController` doesn't have an `index` action. That kinda makes sense - we didn't add very much code to the `BooksController`. But why does it care that the `index` action is missing?
 
-  1.  Remember the routing table? Kinda? Don't worry, it's fuzzy for me too.
-      Let's pull it up again.
+  1.  Remember the routing table? Kinda? Don't worry, it's fuzzy for me too. Let's pull it up again.
 
   1.  Go back to Terminal and stop the `rails server` by running `Ctrl-c`.
 
@@ -232,17 +207,13 @@
        books GET    /books(.:format)          books#index
       ```
 
-      The last column tells us which controller and action get run when we go to
-      the `/books` path.
+      The last column tells us which controller and action get run when we go to the `/books` path.
 
-      The URI Pattern `/books(.:format)` maps to the Controller#Action pair of
-      `books#index`. This tells us requests to the `/books` path will be routed
-      to the `BooksController` `index` action.
+      The URI Pattern `/books(.:format)` maps to the Controller#Action pair of `books#index`. This tells us requests to the `/books` path will be routed to the `BooksController` `index` action.
 
       Clear as mud, right? Don't worry, it'll make more sense later.
 
-  1.  Now that we (kinda) know why we're trying to run the `index` action`,
-      let's add it.
+  1.  Now that we (kinda) know why we're trying to run the `index` action`, let's add it.
 
   1.  Before we go on, restart your web server by running `rails server`.
 {% endsteps %}
@@ -270,16 +241,14 @@
 {% endhighlight %}
 
 {% steps %}
-  1.  In your text editor, open the `BooksController` and add the following
-      method inside the `BooksController` class.
+  1.  In your text editor, open the `BooksController` and add the following method inside the `BooksController` class.
 
       ```
       def index
       end
       ```
 
-  1.  Save your changes and try going to
-      [http://localhost:3000/books](http://localhost:3000) again.
+  1.  Save your changes and try going to [http://localhost:3000/books](http://localhost:3000) again.
 
       ![Aaugh!](http://25.media.tumblr.com/tumblr_lz8plpLwB11qg39ewo1_500.gif)
 {% endsteps %}
@@ -297,13 +266,9 @@
 {% endscreenshot %}
 
 {% steps %}
-  1.  We're making progress. Seriously! The `/books` path is sucessfully
-      reaching the `BooksController` `index` action, but we're getting an error
-      because we're missing a template.
+  1.  We're making progress. Seriously! The `/books` path is sucessfully reaching the `BooksController` `index` action, but we're getting an error because we're missing a template.
 
-      A template is a view that get's rendered at the end of a controller
-      action. In this case, Rails is expecting your applicaiton to have an
-      `index` template to go with the `BooksController` `index` action.
+      A template is a view that get's rendered at the end of a controller action. In this case, Rails is expecting your applicaiton to have an `index` template to go with the `BooksController` `index` action.
 
       Let's make that happen!
 
@@ -311,25 +276,19 @@
 
   1.  All templates live in `app/views`.
 
-      `app/views` will have directories for each of the controllers in your
-      application. By default, a controller's template directory will be the
-      name of the controller...minus the controller.
+      `app/views` will have directories for each of the controllers in your application. By default, a controller's template directory will be the name of the controller...minus the controller.
 
-      For example, the `BooksController`'s template directory will be
-      `app/views/books`.
+      For example, the `BooksController`'s template directory will be `app/views/books`.
 
-  1.  Create the `BooksController` template directory by running `mkdir
-      app/views/books`.
+  1.  Create the `BooksController` template directory by running `mkdir app/views/books`.
 
-  1.  Now, create the `BooksController`'s `index` template by running `touch
-      app/views/books/index.html.erb`.`
+  1.  Now, create the `BooksController`'s `index` template by running `touch app/views/books/index.html.erb`.`
 
   1.  Restart your web server.
 
       (Remember? Start your web server by running `rails server`.)
 
-  1.  Now, try going to
-      [http://localhost:3000/books](http://localhost:3000/books).
+  1.  Now, try going to [http://localhost:3000/books](http://localhost:3000/books).
 
       Yay, no errors!
 {% endsteps %}
@@ -357,15 +316,13 @@
 {% steps %}
   1.  Ok, let's make this page a little more interesting.
 
-  1.  In your text editor, open `app/views/books/index.html.erb` and add the
-      following line:
+  1.  In your text editor, open `app/views/books/index.html.erb` and add the following line:
 
       ```
       <h1>Welcome to My Super Rad Bookstore!</h1>
       ```
 
-  1.  Save your changes and go to
-      [http://localhost:3000/books](http:://localhost:3000/books) again.
+  1.  Save your changes and go to [http://localhost:3000/books](http:://localhost:3000/books) again.
 
       Yay! 🎉
 {% endsteps %}
@@ -375,30 +332,21 @@
 {% endhighlight %}
 
 {% aside %}
-  You've been going to the `/books` path a bunch and as a result you've been
-  running the `BooksController` `index` action a lot.
+  You've been going to the `/books` path a bunch and as a result you've been running the `BooksController` `index` action a lot.
 
-  You can think of the `index` action as the index of a book because it's used
-  to list all of a controller's resources. Since we're in the
-  `BooksController`, this `index` action is going to list all of the
-  application's books.
+  You can think of the `index` action as the index of a book because it's used to list all of a controller's resources. Since we're in the `BooksController`, this `index` action is going to list all of the application's books.
 {% endaside %}
 
 {% steps %}
-  1.  Before you can show all of your application's books, you have to make the
-      books data available.
+  1.  Before you can show all of your application's books, you have to make the books data available.
 
-  1.  In your text editor, open `app/controllers/books_controller.rb`. Inside
-      the `index` method, add the following line:
+  1.  In your text editor, open `app/controllers/books_controller.rb`. Inside the `index` method, add the following line:
 
       ```
       @books = Book.all
       ```
 
-      That line might look a little familiar. We used `Book.all` in [Chapter
-      2](link) to list all your application's books in the `rails console`.
-      We're using the same method again so we can render your application's
-      books in the browser.
+      That line might look a little familiar. We used `Book.all` in [Chapter 2](link) to list all your application's books in the `rails console`. We're using the same method again so we can render your application's books in the browser.
 
   1.  Save your changes.
 {% endsteps %}
@@ -412,20 +360,17 @@
 {% endhighlight %}
 
 {% steps %}
-  1.  By making that change to the `index` action, you've made book data
-      available to your `index` template.
+  1.  By making that change to the `index` action, you've made book data available to your `index` template.
 
       Let's see what you can do with it.
 
-  1.  In your text editor, open `app/views/books/index.html.erb` and add the
-      following line to the end of the file:
+  1.  In your text editor, open `app/views/books/index.html.erb` and add the following line to the end of the file:
 
       ```
       <%= @books[0].title %>
       ```
 
-  1.  Save your changes and try going to
-      [http://localhost:3000/books](http://localhost:3000/books) again.
+  1.  Save your changes and try going to [http://localhost:3000/books](http://localhost:3000/books) again.
 {% endsteps %}
 
 {% highlight ruby %}
@@ -438,21 +383,15 @@
 {% endscreenshot %}
 
 {% steps %}
-  1.  Your application's data might be a little different than mine, but you're
-      probably seeing the title to *MY* favorite book. Yippie!
+  1.  Your application's data might be a little different than mine, but you're probably seeing the title to *MY* favorite book. Yippie!
 
-      (If your data is different, you're seeing the title of some other
-      book...sigh 😉)
+      (If your data is different, you're seeing the title of some other book...sigh 😉)
 
-  1.  You had to do a couple of things to get that title to show up in your
-      browser.
+  1.  You had to do a couple of things to get that title to show up in your browser.
 
-      First in the `BooksController` `index` method, you defined an instance
-      variable `@books` and assigned it all the books in your application.
+      First in the `BooksController` `index` method, you defined an instance variable `@books` and assigned it all the books in your application.
 
-      Then in the associated `index` template
-      (`app/views/books/index.html.erb`), you used some funny looking syntax to
-      get the first book and show it's title.
+      Then in the associated `index` template (`app/views/books/index.html.erb`), you used some funny looking syntax to get the first book and show it's title.
 
       Let's focus on that funny looking syntax for a few minutes.
 {% endsteps %}
@@ -472,9 +411,7 @@
       <%= @books[1].title %>
       ```
 
-  1.  Can you guess what this will change? Reload
-      [http:://localhost:3000/books](http:://localhost:3000/books) to see what
-      happens.
+  1.  Can you guess what this will change? Reload [http:://localhost:3000/books](http:://localhost:3000/books) to see what happens.
 {% endsteps %}
 
 {% screenshot %}
@@ -484,19 +421,15 @@
 {% steps %}
   1.  You're seeing a different book title, aren't you?
 
-      You used `@books[0]` to get the first book, and you changed it to
-      `@books[1]` to get the next book.
+      You used `@books[0]` to get the first book, and you changed it to `@books[1]` to get the next book.
 
   1.  I bet you could get all the books to render on the `index` template...
 
-      Spend some time and see if you can get all the book titles to render. If
-      you've been following along with the tutorial, you should have seven
-      books in your application.
+      Spend some time and see if you can get all the book titles to render. If you've been following along with the tutorial, you should have seven books in your application.
 
       If you know some HTML, try listing the titles in an unordered list.
 
-      Don't know very much HTML? Don't worry about it - you'll get familiar with
-      it reaaaal soon. Just focus on getting the titles to render.
+      Don't know very much HTML? Don't worry about it - you'll get familiar with it reaaaal soon. Just focus on getting the titles to render.
 {% endsteps %}
 
 {% steps %}
@@ -514,11 +447,9 @@
       <%= @books[6].title %>
       ```
 
-      That renders all the book titles, but they end up getting rendered on a
-      single line.
+      That renders all the book titles, but they end up getting rendered on a single line.
 
-  1.  If you know some HTML, you may have thrown in a few `br`s to give the
-      titles some space like this:
+  1.  If you know some HTML, you may have thrown in a few `br`s to give the titles some space like this:
 
       ```
       <%= @books[0].title %>
@@ -550,8 +481,7 @@
       </ul>
     ```
 
-  1.  If you used an unordered list, great! If not, no worries - update your
-      solution to use an unordered list.
+  1.  If you used an unordered list, great! If not, no worries - update your solution to use an unordered list.
 {% endsteps %}
 
 {% highlight ruby %}
@@ -569,14 +499,13 @@
 {% endhighlight %}
 
 {% screenshot %}
-Rendered books index with ul of book titles
+  Rendered books index with ul of book titles
 {% endscreenshot %}
 
 {% steps %}
   1.  Yay! Book titles!
 
-      But doesn't a lot of that code in your template look just a
-      little...repetitive?
+      But doesn't a lot of that code in your template look just a little...repetitive?
 
       ```
       <li><%= @books[0].title %></li>
@@ -589,19 +518,15 @@ Rendered books index with ul of book titles
 
       There is :)
 
-  1.  Remember when you defined `@books` in the `BooksController` `index`
-      method?
+  1.  Remember when you defined `@books` in the `BooksController` `index` method?
 
       ```
       @books = Book.all
       ```
 
-      You defined `@books` to be a collection of all the books in your
-      application's database. For our purposes, we can treat this collection
-      like a [Ruby Array](http://ruby-doc.org/core-2.3.1/Array.html).
+      You defined `@books` to be a collection of all the books in your application's database. For our purposes, we can treat this collection like a [Ruby Array](http://ruby-doc.org/core-2.3.1/Array.html).
 
-  1.  You can get each item of a Ruby array by it's index, and the first item
-      starts at index 0.
+  1.  You can get each item of a Ruby array by it's index, and the first item starts at index 0.
 
       Does that sound familiar? It's what you used to render the book titles.
 
@@ -611,14 +536,9 @@ Rendered books index with ul of book titles
       ...
       ```
 
-      This works well, but it's a very manual process. You have to individually
-      access each book to render its title. It also depends on us knowing how
-      many books there are in the database.
+      This works well, but it's a very manual process. You have to individually access each book to render its title. It also depends on us knowing how many books there are in the database.
 
-  1.  In Ruby, we don't have to access each book individually like this. We can
-      use Array's
-      [`each`](http://ruby-doc.org/core-2.3.1/Array.html#method-i-each) method
-      to help us out.
+  1.  In Ruby, we don't have to access each book individually like this. We can use Array's [`each`](http://ruby-doc.org/core-2.3.1/Array.html#method-i-each) method to help us out.
 
       Let's see what that would look like.
 {% endsteps %}
@@ -634,8 +554,7 @@ Rendered books index with ul of book titles
       books = Books.all
       ```
 
-      You now have a `books` variable that's been assigned all the books in your
-      application's database. `books` can be thought of as a Ruby Array.
+      You now have a `books` variable that's been assigned all the books in your application's database. `books` can be thought of as a Ruby Array.
 
       Sound familiar :)
 
@@ -649,9 +568,7 @@ Rendered books index with ul of book titles
 
       You used the `each` method to iterate over each book and print its title.
 
-  1.  The curly braces ({}) after `each` are the start and end of a block.
-      We've seen the other block notation before - it starts with a `do` and
-      ends with an `end`.
+  1.  The curly braces ({}) after `each` are the start and end of a block. We've seen the other block notation before - it starts with a `do` and ends with an `end`.
 
       Try running the following:
 
@@ -661,8 +578,7 @@ Rendered books index with ul of book titles
       end
       ```
 
-      The syntax might be different, but it's the same result - each of the book
-      titles are printed.
+      The syntax might be different, but it's the same result - each of the book titles are printed.
 
   1.  At the beginning of the block, you have a couple of pipes surronding `book`
 
@@ -670,8 +586,7 @@ Rendered books index with ul of book titles
       books.each { |book| ... }
       ```
 
-      This is called a block parameter. In this case, it lets you access each
-      book so you can print its title.
+      This is called a block parameter. In this case, it lets you access each book so you can print its title.
 
   1.  Before, we would've manually gone through each book to print its title.
 
@@ -687,11 +602,9 @@ Rendered books index with ul of book titles
       books.each { |book| puts book.title }
       ```
 
-  1.  Try playing with the `each` method to see what else you can print out. You
-      should be able print things like the book ids, authors, and quantities.
+  1.  Try playing with the `each` method to see what else you can print out. You should be able print things like the book ids, authors, and quantities.
 
-  1.  When you're done exploring, run `exit` to exit the `rails console` and
-      restart the `rails server`.
+  1.  When you're done exploring, run `exit` to exit the `rails console` and restart the `rails server`.
 {% endsteps %}
 
 {% highlight ruby %}
@@ -727,24 +640,20 @@ Rendered books index with ul of book titles
 
   1.  In you text editor, open `app/views/books/index.html.erb`.
 
-  1.  At the end of the file, add a new, empty unordered list. It should look
-      like this:
+  1.  At the end of the file, add a new, empty unordered list. It should look like this:
 
       ```
       <ul>
       </ul>
       ```
 
-  1.  Inside the new unordered list, we'll want to iterate over all the books
-      assigned to `@books` and render a list item for each book title.
+  1.  Inside the new unordered list, we'll want to iterate over all the books assigned to `@books` and render a list item for each book title.
 
       We can iterate over `@books` by using the `each` method.
 
-  1.  We've seen how to use the `each` method on the `rails console`, but how
-      will you use it in your template?
+  1.  We've seen how to use the `each` method on the `rails console`, but how will you use it in your template?
 
-      To run Ruby code in your template, you have to put it inside some funny
-      looking brackets:
+      To run Ruby code in your template, you have to put it inside some funny looking brackets:
 
       ```
       <% ... %>
@@ -752,15 +661,13 @@ Rendered books index with ul of book titles
 
       Everything inside `<% %>` will get run in your template.
 
-      We've seen something similar before. Remember how you got the book titles
-      to render?
+      We've seen something similar before. Remember how you got the book titles to render?
 
       ```
       <%= @books[0].title %>
       ```
 
-      The syntax is slightly different. `<%= %>` runs Ruby code *and* renders
-      the result in your template.
+      The syntax is slightly different. `<%= %>` runs Ruby code *and* renders the result in your template.
 
       `<% %>` on the other hand *only* runs Ruby code. It *does not* render the
       result of that code.
@@ -772,11 +679,9 @@ Rendered books index with ul of book titles
       <% end %>
       ```
 
-      Go to [http://localhost:3000/books](http://localhost:3000/books) again.
-      Did anything change?
+      Go to [http://localhost:3000/books](http://localhost:3000/books) again. Did anything change?
 
-      Nothing changed! You're running `@books.each` in your template, but since
-      it's inside `<% %>` the result of that block isn't rendered.
+      Nothing changed! You're running `@books.each` in your template, but since it's inside `<% %>` the result of that block isn't rendered.
 {% endsteps %}
 
 {% highlight ruby %}
@@ -799,20 +704,17 @@ Rendered books index with ul of book titles
 {% endhighlight %}
 
 {% steps %}
-  1.  Now that you have your block setup, you're ready to render some book
-      titles.
+  1.  Now that you have your block setup, you're ready to render some book titles.
 
-  1.  Spend a few minutes and see if you can get each book title to render as a
-      list item inside the block.
+  1.  Spend a few minutes and see if you can get each book title to render as a list item inside the block.
 
       Inside the block, each book is availble to you as `book`.
 
-      When you're done, you should see two identical unordered lists on
-      [http://localhost:3000/books](http://localhost:3000/books).
+      When you're done, you should see two identical unordered lists on [http://localhost:3000/books](http://localhost:3000/books).
 {% endsteps %}
 
 {% screenshot %}
-Screenshot of /books with two unordered lists
+  Screenshot of /books with two unordered lists
 {% endscreenshot %}
 
 {% steps %}
@@ -828,8 +730,7 @@ Screenshot of /books with two unordered lists
 
       Update your solution to match this solution.
 
-  1.  Compare your two unordered lists. They both end in the same result, but one
-      required a little more effort.
+  1.  Compare your two unordered lists. They both end in the same result, but one required a little more effort.
 
       ```
       <ul>
@@ -849,11 +750,9 @@ Screenshot of /books with two unordered lists
       </ul>
       ```
 
-      We can take advantage of the ability to run Ruby code inside Rails
-      templates to do things quickly.
+      We can take advantage of the ability to run Ruby code inside Rails templates to do things quickly.
 
-  1.  You don't need to show both unordered lists, so go ahead and remove the
-      first one.
+  1.  You don't need to show both unordered lists, so go ahead and remove the first one.
 {% endsteps %}
 
 {% highlight ruby %}
@@ -867,11 +766,9 @@ Screenshot of /books with two unordered lists
 {% endhighlight %}
 
 {% steps %}
-  1.  Now that you have book titles rendering, let's try adding some
-      information.
+  1.  Now that you have book titles rendering, let's try adding some information.
 
-  1.  Update the books unordered lists so it includes the book author next to
-      each author like this:
+  1.  Update the books unordered lists so it includes the book author next to each author like this:
 
       why's (poignant) Guide to Ruby by why the lucky stiff
 {% endsteps %}
@@ -879,15 +776,13 @@ Screenshot of /books with two unordered lists
 {% steps %}
   1.  What did you come up with? Compare your solution with people around you.
 
-      Inside the `@books.each` block, you should've edited the list item so it
-      renders each book's author next to its title.
+      Inside the `@books.each` block, you should've edited the list item so it renders each book's author next to its title.
 
       ```
       <li><%= book.title %> by <%= book.author %></li>
       ```
 
-  1.  Before you wrap up, make sure you have the book authors rendering next to
-      the book titles.
+  1.  Before you wrap up, make sure you have the book authors rendering next to the book titles.
 {% endsteps %}
 
 {% highlight ruby %}
